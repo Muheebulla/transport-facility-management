@@ -1,0 +1,223 @@
+.ride-list-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .header-section h2 {
+    color: #2d3748;
+    margin: 0;
+  }
+  
+  .filters {
+    min-width: 200px;
+  }
+  
+  .rides-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  
+  .ride-card {
+    border: 2px solid #e2e8f0;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+    background: #f7fafc;
+  }
+  
+  .ride-card:hover {
+    border-color: #4299e1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ride-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .vehicle-icon {
+    font-size: 1.5rem;
+  }
+  
+  .vehicle-type {
+    font-weight: 600;
+    color: #2d3748;
+    flex: 1;
+  }
+  
+  .vehicle-no {
+    background: #edf2f7;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  
+  .ride-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .label {
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 0.875rem;
+  }
+  
+  .value {
+    color: #2d3748;
+    font-weight: 500;
+  }
+  
+  .value.seats {
+    color: #38a169;
+    font-weight: 700;
+  }
+  
+  .value.provider {
+    font-family: monospace;
+    background: #edf2f7;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+  }
+  
+  .book-btn {
+    width: 100%;
+    background: #48bb78;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .book-btn:hover:not(:disabled) {
+    background: #38a169;
+  }
+  
+  .book-btn:disabled {
+    background: #a0aec0;
+    cursor: not-allowed;
+  }
+  
+  .no-rides {
+    text-align: center;
+    padding: 3rem;
+    color: #718096;
+    grid-column: 1 / -1;
+  }
+  
+  .no-rides p {
+    margin: 0.5rem 0;
+  }
+  
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    min-width: 400px;
+    max-width: 90vw;
+  }
+  
+  .modal-content h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #2d3748;
+  }
+  
+  .modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: flex-end;
+  }
+  
+  .btn-primary, .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .btn-primary {
+    background: #4299e1;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background: #3182ce;
+  }
+  
+  .btn-secondary {
+    background: #e2e8f0;
+    color: #4a5568;
+  }
+  
+  .btn-secondary:hover {
+    background: #cbd5e0;
+  }
+  
+  @media (max-width: 768px) {
+    .header-section {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .rides-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+      min-width: unset;
+      width: 90vw;
+      margin: 1rem;
+    }
+    
+    .modal-actions {
+      flex-direction: column;
+    }
+  }

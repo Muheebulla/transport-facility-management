@@ -1,0 +1,89 @@
+<div class="ride-form-container">
+    <h2>Add New Ride</h2>
+    <form (ngSubmit)="onSubmit()" class="ride-form">
+      <app-input-field
+        id="employeeId"
+        label="Employee ID"
+        type="text"
+        placeholder="Enter your employee ID"
+        [value]="formData.employeeId"
+        [required]="true"
+        [showError]="errors.employeeId"
+        errorMessage="Employee ID is required"
+        (valueChange)="formData.employeeId = $event">
+      </app-input-field>
+  
+      <app-select-field
+        id="vehicleType"
+        label="Vehicle Type"
+        placeholder="Select vehicle type"
+        [options]="vehicleOptions"
+        [value]="formData.vehicleType"
+        [required]="true"
+        [showError]="errors.vehicleType"
+        errorMessage="Vehicle type is required"
+        (valueChange)="formData.vehicleType = $event">
+      </app-select-field>
+  
+      <app-input-field
+        id="vehicleNo"
+        label="Vehicle Number"
+        type="text"
+        placeholder="Enter vehicle number"
+        [value]="formData.vehicleNo"
+        [required]="true"
+        [showError]="errors.vehicleNo"
+        errorMessage="Vehicle number is required"
+        (valueChange)="formData.vehicleNo = $event">
+      </app-input-field>
+  
+      <app-input-field
+        id="vacantSeats"
+        label="Vacant Seats"
+        type="number"
+        placeholder="Enter number of vacant seats"
+        [value]="formData.vacantSeats.toString()"
+        [required]="true"
+        [showError]="errors.vacantSeats"
+        errorMessage="At least 1 vacant seat is required"
+        (valueChange)="formData.vacantSeats = +$event">
+      </app-input-field>
+  
+      <app-time-picker
+      id="time"
+      label="Pickup Time"
+      [value]="formData.time"
+      [required]="true"
+      [showError]="errors.time"
+     
+      errorMessage="Pickup time is required"
+      (valueChange)="formData.time = $event">
+    </app-time-picker>
+  
+      <app-input-field
+        id="pickUpPoint"
+        label="Pickup Point"
+        type="text"
+        placeholder="Enter pickup location"
+        [value]="formData.pickUpPoint"
+        [required]="true"
+        [showError]="errors.pickUpPoint"
+        errorMessage="Pickup point is required"
+        (valueChange)="formData.pickUpPoint = $event">
+      </app-input-field>
+  
+      <app-input-field
+        id="destination"
+        label="Destination"
+        type="text"
+        placeholder="Enter destination"
+        [value]="formData.destination"
+        [required]="true"
+        [showError]="errors.destination"
+        errorMessage="Destination is required"
+        (valueChange)="formData.destination = $event">
+      </app-input-field>
+  
+      <button type="submit" class="submit-btn">Add Ride</button>
+    </form>
+  </div>

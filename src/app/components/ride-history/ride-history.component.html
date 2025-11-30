@@ -1,0 +1,116 @@
+<div class="ride-history-container">
+    <div class="header-section">
+      <h2>Booking History</h2>
+
+      <div class="filters-section">
+        <div class="filter-group">
+          <label class="filter-label">Filter by Status:</label>
+          <div class="status-filters">
+            <button 
+              class="status-filter-btn" 
+              [class.active]="filterStatus === 'all'"
+              (click)="onStatusFilterChange('all')">
+              All
+            </button>
+            <button 
+              class="status-filter-btn status-upcoming" 
+              [class.active]="filterStatus === 'upcoming'"
+              (click)="onStatusFilterChange('upcoming')">
+              🕒 Upcoming
+            </button>
+            <button 
+              class="status-filter-btn status-completed" 
+              [class.active]="filterStatus === 'completed'"
+              (click)="onStatusFilterChange('completed')">
+              ✅ Completed
+            </button>
+            <button 
+              class="status-filter-btn status-cancelled" 
+              [class.active]="filterStatus === 'cancelled'"
+              (click)="onStatusFilterChange('cancelled')">
+              ❌ Cancelled
+            </button>
+          </div>
+        </div>
+  
+        <div class="search-group">
+          <app-input-field
+            id="searchEmployee"
+            label="Search by Employee ID"
+            type="text"
+            placeholder="Enter Employee ID to search..."
+            [value]="searchEmployeeId"
+            (valueChange)="onSearchChange($event)">
+          </app-input-field>
+        </div>
+      </div>
+    </div>
+  
+    <div class="history-list">
+      <div *ngFor="let item of filteredHistory" class="history-card">
+        <div class="card-header">
+          <div class="ride-info">
+            <span class="vehicle-icon">{{ getVehicleIcon(item.rideDetails.vehicleType) }}</span>
+            <span class="vehicle-type">{{ item.rideDetails.vehicleType }}</span>
+            <span class="vehicle-no">{{ item.rideDetails.vehicleNo }}</span>
+          </div>
+          <div class="status-badge" [class]="getStatusBadgeClass(item.status)">
+            {{ getStatusIcon(item.status) }} {{ item.status | titlecase }}
+          </div>
+        </div>
+  
+        <div class="card-content">
+          <div class="route-info">
+            <div class="route-from">
+              <strong>📍 From:</strong> {{ item.rideDetails.pickUpPoint }}
+            </div>
+            <div class="route-to">
+              <strong>🎯 To:</strong> {{ item.rideDetails.destination }}
+            </div>
+          </div>
+  
+          <div class="timing-info">
+            <div class="ride-time">
+              <strong>🕒 Ride Time:</strong> {{ item.rideDetails.time }}
+            </div>
+            <div class="booked-time">
+              <strong>📅 Booked On:</strong> {{ item.bookedAt | date:'medium' }}
+            </div>
+          </div>
+  
+          <div class="employee-info">
+            <div class="provider">
+              <strong>👤 Provider:</strong> {{ item.rideDetails.employeeId }}
+            </div>
+            <div class="booker">
+              <strong>👥 Booker:</strong> {{ item.employeeId }}
+            </div>
+          </div>
+        </div>
+  
+        <div class="card-actions" *ngIf="shouldShowCancelButton(item)">
+            <button 
+              class="cancel-btn"
+              (click)="cancelBooking(item)"
+              title="Cancel this booking">
+              🚫 Cancel Booking
+            </button>
+          </div>
+          <div class="card-info" *ngIf="!shouldShowCancelButton(item) && item.status === 'upcoming'">
+            <div class="info-message">
+              ⚠️ This ride has already departed and cannot be cancelled.
+            </div>
+          </div>
+      </div>
+      <div *ngIf="filteredHistory.length === 0" class="no-history">
+        <div class="no-history-icon">📊</div>
+        <h3>No Booking History Found</h3>
+        <p *ngIf="filterStatus !== 'all' || searchEmployeeId">
+          No bookings match your current filters. Try adjusting your search criteria.
+        </p>
+        <p *ngIf="filterStatus === 'all' && !searchEmployeeId">
+          You haven't made any bookings yet. Start by booking a ride from the available rides tab.
+        </p>
+      </div>
+    </div>
+  </div>

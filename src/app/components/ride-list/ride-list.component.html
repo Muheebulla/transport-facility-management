@@ -1,0 +1,78 @@
+<div class="ride-list-container">
+    <div class="header-section">
+      <h2>Available Rides</h2>
+      
+      <div class="filters">
+        <app-select-field
+          id="vehicleFilter"
+          label="Filter by Vehicle Type"
+          [options]="vehicleTypes"
+          [value]="filters.vehicleType || ''"
+          (valueChange)="onVehicleTypeChange($event)">
+        </app-select-field>
+      </div>
+    </div>
+    <div class="rides-grid">
+      <div *ngFor="let ride of rides" class="ride-card">
+        <div class="ride-header">
+          <span class="vehicle-icon">{{ getVehicleIcon(ride.vehicleType) }}</span>
+          <span class="vehicle-type">{{ ride.vehicleType }}</span>
+          <span class="vehicle-no">{{ ride.vehicleNo }}</span>
+        </div>
+  
+        <div class="ride-details">
+          <div class="detail-item">
+            <span class="label">Time:</span>
+            <span class="value">{{ ride.time }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">From:</span>
+            <span class="value">{{ ride.pickUpPoint }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">To:</span>
+            <span class="value">{{ ride.destination }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Seats Available:</span>
+            <span class="value seats">{{ ride.vacantSeats }}</span>
+          </div>
+          <div class="detail-item">
+            <span class="label">Provider ID:</span>
+            <span class="value provider">{{ ride.employeeId }}</span>
+          </div>
+        </div>
+  
+        <button 
+          class="book-btn" 
+          (click)="onBookRide(ride.id)"
+          [disabled]="ride.vacantSeats === 0">
+          {{ ride.vacantSeats === 0 ? 'No Seats' : 'Book Ride' }}
+        </button>
+      </div>
+      <div *ngIf="rides.length === 0" class="no-rides">
+        <p>No available rides found for the current time.</p>
+        <p>Try adjusting filters or check back later.</p>
+      </div>
+    </div>
+
+    <div *ngIf="showBookingForm" class="modal-overlay" (click)="cancelBooking()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <h3>Book This Ride</h3>
+        <app-input-field
+          id="bookingEmployeeId"
+          label="Your Employee ID"
+          type="text"
+          placeholder="Enter your employee ID"
+          [value]="bookingEmployeeId"
+          [required]="true"
+          (valueChange)="bookingEmployeeId = $event">
+        </app-input-field>
+        
+        <div class="modal-actions">
+          <button class="btn-secondary" (click)="cancelBooking()">Cancel</button>
+          <button class="btn-primary" (click)="confirmBooking()">Confirm Booking</button>
+        </div>
+      </div>
+    </div>
+  </div>

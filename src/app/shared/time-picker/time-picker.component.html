@@ -1,0 +1,18 @@
+<div class="form-group">
+    <label *ngIf="label" class="form-label">{{ label }}</label>
+    <select
+      [value]="value"
+      (change)="onTimeChange($event)"
+      [required]="required"
+      [class.error]="showError"
+      class="form-select time-picker"
+    >
+      <option value="">Select a time</option>
+      <option *ngFor="let time of timeSlots" [value]="time">
+        {{ getDisplayTime(time) }}
+      </option>
+    </select>
+    <div *ngIf="showError" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </div>
